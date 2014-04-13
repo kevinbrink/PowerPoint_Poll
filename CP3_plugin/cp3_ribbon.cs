@@ -9,5 +9,9 @@ namespace CP3_plugin {
         private void cp3_ribbon_Load(object sender, RibbonUIEventArgs e) {
 
         }
+
+        private void button1_Click(object sender, RibbonControlEventArgs e) {
+
+        }
     }
 }
