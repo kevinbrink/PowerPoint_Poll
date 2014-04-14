@@ -3,6 +3,7 @@ PowerPoint_Poll
 
 A repository for a PowerPoint plugin to add polls to presentations
 
+# Work done
 - Curently needs to be deployed through VS 
 - works with PP 2010 (no other versions tested)
 - Front end only
