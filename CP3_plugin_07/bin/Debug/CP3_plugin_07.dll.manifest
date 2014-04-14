@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="CP3_plugin_07.dll" version="1.0.0.0" publicKeyToken="40d74a3800a36947" language="neutral" processorArchitecture="msil" type="win32" />
+  <description xmlns="urn:schemas-microsoft-com:asm.v1">CP3_plugin_07</description>
+  <application />
+  <entryPoint>
+    <co.v1:customHostSpecified />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Office.Tools" version="10.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Office.Tools.Common" version="10.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Office.Tools.v4.0.Framework" version="10.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.VisualStudio.Tools.Applications.Runtime" version="10.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="stdole" version="7.0.3300.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CP3_plugin_07.dll" size="25600">
+      <assemblyIdentity name="CP3_plugin_07" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>Zf/Zixm4PJvGjQDZ9k2qjeo2hHI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Office.Tools.Common.v4.0.Utilities.dll" size="32664">
+      <assemblyIdentity name="Microsoft.Office.Tools.Common.v4.0.Utilities" version="10.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>CtnCtseaMyfROIGe0ENdGO6arHg=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <vstav3:addIn xmlns:vstav3="urn:schemas-microsoft-com:vsta.v3">
+    <vstav3:entryPointsCollection>
+      <vstav3:entryPoints>
+        <vstav3:entryPoint class="CP3_plugin_07.ThisAddIn">
+          <assemblyIdentity name="CP3_plugin_07" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+        </vstav3:entryPoint>
+      </vstav3:entryPoints>
+    </vstav3:entryPointsCollection>
+    <vstav3:update enabled="true">
+      <vstav3:expiration maximumAge="7" unit="days" />
+    </vstav3:update>
+    <vstav3:application>
+      <vstov4:customizations xmlns:vstov4="urn:schemas-microsoft-com:vsto.v4">
+        <vstov4:customization>
+          <vstov4:appAddIn application="PowerPoint" loadBehavior="3" keyName="CP3_plugin_07">
+            <vstov4:friendlyName>CP3_plugin_07</vstov4:friendlyName>
+            <vstov4:description>CP3_plugin_07</vstov4:description>
+            <vstov4.1:ribbonTypes xmlns:vstov4.1="urn:schemas-microsoft-com:vsto.v4.1">
+              <vstov4.1:ribbonType name="CP3_plugin_07.cp3_ribbon, CP3_plugin_07, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+            </vstov4.1:ribbonTypes>
+          </vstov4:appAddIn>
+        </vstov4:customization>
+      </vstov4:customizations>
+    </vstav3:application>
+  </vstav3:addIn>
+<publisherIdentity name="CN=Dark1-Nomad\Mark" issuerKeyHash="4756941ce06bd1f54c0252332b0244439cfe6a83" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>/mcFzk89POUW3mTGB6rh9vm0fqw=</DigestValue></Reference></SignedInfo><SignatureValue>Ippy9B0Xg4YoRDlVWEwDJSZzFY6BBH3VxM3kkDxMWncZ7cPzg1ZkBSO+eN5XxiDFfLuemXrLb3fl0tgBckrW3JIuj7KSwoQ1dNtmas00SY8RQH61i9mpXJxs7P3C6Er/win0Gzz9qnIrsHaY6NLZjQz1bh3L63II/ETQH0iEh2Q=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>yN6qcOXO3LrymJLjqQoCcCnAtUjt36hqeny6vfj3pPLEB3fYdXTR9FW3tSlisfUSycitbDWJY5wOJWlvbV9gcg0LQTgc57GADMQvvLnLHXvKSDvfvxbaa+hewG5RtWOjf4L4dCMSS70u9hvvAVcaytYQipKZpCndtXIAuZgnqD8=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="ac7eb4f9f6e1aa07c664de16e53c3d4fce0567fe" Description="" Url=""><as:assemblyIdentity name="CP3_plugin_07.dll" version="1.0.0.0" publicKeyToken="40d74a3800a36947" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=Dark1-Nomad\Mark</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>9gNQBmB8+Rge70qQntcOmDXxSyw=</DigestValue></Reference></SignedInfo><SignatureValue>j/nXq75vV0xMO3bOVzOPA1nIMpQdwkjOYZPIzL16RqO4XipSBChL7R11Ie7sfXzo+DtANi4i8DJh7doiJVvcl1YLqxA5k/byU6LYnUzYECk2/PhkQfFzMYKufOrTO+YKJ9RltZkMzQZTnuC/zZTzbDznenZsvrV/vQBvv1Xf2vs=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>yN6qcOXO3LrymJLjqQoCcCnAtUjt36hqeny6vfj3pPLEB3fYdXTR9FW3tSlisfUSycitbDWJY5wOJWlvbV9gcg0LQTgc57GADMQvvLnLHXvKSDvfvxbaa+hewG5RtWOjf4L4dCMSS70u9hvvAVcaytYQipKZpCndtXIAuZgnqD8=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB2TCCAUKgAwIBAgIQal5ocmwzaJNIEBDPzqCsXzANBgkqhkiG9w0BAQUFADArMSkwJwYDVQQDHiAARABhAHIAawAxAC0ATgBvAG0AYQBkAFwATQBhAHIAazAeFw0xNDA0MTQxNDMzNTJaFw0xNTA0MTQyMDMzNTJaMCsxKTAnBgNVBAMeIABEAGEAcgBrADEALQBOAG8AbQBhAGQAXABNAGEAcgBrMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDI3qpw5c7cuvKYkuOpCgJwKcC1SO3fqGp6fLq9+Pek8sQHd9h1dNH0Vbe1KWKx9RLJyK1sNYljnA4laW9tX2ByDQtBOBznsYAMxC+8ucsde8pIO9+/Ftpr6F7AblG1Y6N/gvh0IxJLvS72G+8BVxrK1hCKkpmkKd21cgC5mCeoPwIDAQABMA0GCSqGSIb3DQEBBQUAA4GBAFns6oKpxEveATXw2NARkUbxcTot1EZwszHinubvIRovl3yd+RKKoP4qL0k3jHvKu2jEIb0/EB3EPB/YN0gyLDD5bTnjReI+p7PJcj2aQlSMQNHPPcCx79u5y56fsH5/YA8ZjPPR2M6/cGg7g+TJtHGk8ULj5Mkt9H/mMCgaCJpO</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

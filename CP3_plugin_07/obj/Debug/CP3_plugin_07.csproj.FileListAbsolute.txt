@@ -1,0 +1,12 @@
+C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin_07\obj\Debug\CP3_plugin_07.csprojResolveAssemblyReference.cache
+C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin_07\obj\Debug\CP3_plugin_07.Properties.Resources.resources
+C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin_07\obj\Debug\CP3_plugin_07.csproj.GenerateResource.Cache
+C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin_07\bin\Debug\CP3_plugin_07.dll
+C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin_07\bin\Debug\CP3_plugin_07.pdb
+C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin_07\bin\Debug\CP3_plugin_07.dll.manifest
+C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin_07\bin\Debug\CP3_plugin_07.vsto
+C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin_07\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin_07\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin_07\obj\Debug\CP3_plugin_07.cp3_ribbon.resources
+C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin_07\obj\Debug\CP3_plugin_07.dll
+C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin_07\obj\Debug\CP3_plugin_07.pdb
