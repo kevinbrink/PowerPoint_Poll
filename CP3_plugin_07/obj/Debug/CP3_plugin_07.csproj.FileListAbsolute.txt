@@ -10,3 +10,4 @@ C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin_07\bin\Debug\Microsoft.Office.Too
 C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin_07\obj\Debug\CP3_plugin_07.cp3_ribbon.resources
 C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin_07\obj\Debug\CP3_plugin_07.dll
 C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin_07\obj\Debug\CP3_plugin_07.pdb
+C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin_07\obj\Debug\CP3_plugin_07.Form1.resources

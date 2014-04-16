@@ -11,7 +11,8 @@ namespace CP3_plugin {
         }
 
         private void button1_Click(object sender, RibbonControlEventArgs e) {
-
+            Form1 myFrm = new Form1();
+            myFrm.Show();
         }
     }
 }
