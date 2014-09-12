@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 
 namespace CP3_plugin {
     public partial class Form1 : Form { 
@@ -38,8 +39,12 @@ namespace CP3_plugin {
         private void button1_Click(object sender, EventArgs e)
         {
             // add meta data to slide here
+            PowerPoint.Application ppApp = Globals.ThisAddIn.Application;
+            PowerPoint.SlideRange ppSR = ppApp.ActiveWindow.Selection.SlideRange;
 
-            Close();
+            textBox1.Text = Convert.ToString(ppSR.SlideIndex);
+
+            //Close();
         }
     }
 }
