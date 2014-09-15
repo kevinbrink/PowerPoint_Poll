@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Core;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -42,7 +43,35 @@ namespace CP3_plugin {
             PowerPoint.Application ppApp = Globals.ThisAddIn.Application;
             PowerPoint.SlideRange ppSR = ppApp.ActiveWindow.Selection.SlideRange;
 
-            textBox1.Text = Convert.ToString(ppSR.SlideIndex);
+            // get data from dialog
+            int slideIndex = ppSR.SlideIndex;
+            string question = QuestionBox.Text;
+            bool tfCorrect;
+
+            if (format1.Checked){
+                // true or false                
+                if (TrueRadio.Checked){
+                    tfCorrect = true;
+                } else if (falseRadio.Checked) {
+                    tfCorrect = false;
+                }
+                else
+                {
+                    // error must select correct answer first
+                }
+            }else if (format2.Checked){
+                // multiple choice
+
+            }
+
+            // create custom xml tag and insert
+            //http://code.msdn.microsoft.com/office/PowerPoint-2010-Use-Custom-794ffe88
+            //ppSR.CustomerData
+
+            CustomXMLPart pollData = ppSR.CustomerData.Add();
+            pollData.LoadXML("<Customer><CustomerID>Customer #1</CustomerID></Customer>");
+
+            QuestionBox.Text = Convert.ToString(pollData.XML);
 
             //Close();
         }
