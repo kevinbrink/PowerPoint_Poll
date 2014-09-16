@@ -39,7 +39,6 @@ namespace CP3_plugin {
         // insert meta data and close form
         private void button1_Click(object sender, EventArgs e)
         {
-            // add meta data to slide here
             PowerPoint.Application ppApp = Globals.ThisAddIn.Application;
             PowerPoint.SlideRange ppSR = ppApp.ActiveWindow.Selection.SlideRange;
 
@@ -63,7 +62,7 @@ namespace CP3_plugin {
                     MessageBox.Show("There was no correct answer selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     return;
                 }
-            }else if (format2.Checked){
+            }else if (format2.Checked) {
                 // multiple choice
                 ans1 = textBox2.Text;
                 answerString = answerString + "<Answer1>" + ans1 + "</Answer1>";
@@ -89,12 +88,12 @@ namespace CP3_plugin {
                 {
                     // error must select correct answer first
                     MessageBox.Show("There was no correct answer selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    return;
                 }
             }
 
             // create custom xml tag and insert
             //http://code.msdn.microsoft.com/office/PowerPoint-2010-Use-Custom-794ffe88
-            //ppSR.CustomerData
 
             CustomXMLPart pollData = ppSR.CustomerData.Add();
             if (format1.Checked)
