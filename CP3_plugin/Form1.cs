@@ -84,7 +84,7 @@ namespace CP3_plugin {
                 answerString = answerString + "<Answer5>" + ans5 + "</Answer5>";
                 if (checkBox5.Checked) correctAnswer = correctAnswer + "E";
 
-                if (!checkBox1.Checked || !checkBox2.Checked || !checkBox3.Checked || !checkBox4.Checked || !checkBox5.Checked)
+                if (checkBox1.Checked == false && checkBox2.Checked == false && checkBox3.Checked == false && checkBox4.Checked == false && checkBox5.Checked == false)
                 {
                     // error must select correct answer first
                     MessageBox.Show("There was no correct answer selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
