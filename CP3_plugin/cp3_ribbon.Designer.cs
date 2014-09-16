@@ -51,6 +51,7 @@
             // 
             this.button1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.KeyTip = "P";
             this.button1.Label = "Insert Poll";
             this.button1.Name = "button1";
             this.button1.ShowImage = true;
