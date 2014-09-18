@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Linq;
 using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 using Office = Microsoft.Office.Core;
+using Microsoft.Office.Core;
 
 namespace CP3_plugin
 {
@@ -22,7 +23,6 @@ namespace CP3_plugin
             return Globals.Factory.GetRibbonFactory().CreateRibbonManager(
                     new Microsoft.Office.Tools.Ribbon.IRibbonExtension[] { new cp3_ribbon() });
         }
-
         #region VSTO generated code
 
         /// <summary>

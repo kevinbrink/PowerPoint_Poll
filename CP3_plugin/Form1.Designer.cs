@@ -24,25 +24,25 @@
         /// </summary>
         private void InitializeComponent() {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.question = new System.Windows.Forms.TextBox();
+            this.trueFalse = new System.Windows.Forms.RadioButton();
+            this.multipleChoice = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.answerEIsCorrect = new System.Windows.Forms.CheckBox();
+            this.answerDIsCorrect = new System.Windows.Forms.CheckBox();
+            this.answerCIsCorrect = new System.Windows.Forms.CheckBox();
+            this.answerBIsCorrect = new System.Windows.Forms.CheckBox();
+            this.answerAIsCorrect = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.answerE = new System.Windows.Forms.TextBox();
+            this.answerD = new System.Windows.Forms.TextBox();
+            this.answerC = new System.Windows.Forms.TextBox();
+            this.answerB = new System.Windows.Forms.TextBox();
+            this.answerA = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,8 +52,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.answerFalse = new System.Windows.Forms.RadioButton();
+            this.answerTrue = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -69,45 +69,45 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Question:";
             // 
-            // textBox1
+            // question
             // 
-            this.textBox1.Location = new System.Drawing.Point(20, 32);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(568, 85);
-            this.textBox1.TabIndex = 1;
+            this.question.Location = new System.Drawing.Point(20, 32);
+            this.question.Margin = new System.Windows.Forms.Padding(4);
+            this.question.Multiline = true;
+            this.question.Name = "textBox1";
+            this.question.Size = new System.Drawing.Size(568, 85);
+            this.question.TabIndex = 1;
             // 
-            // radioButton1
+            // trueFalse
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(13, 4);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(4);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(105, 21);
-            this.radioButton1.TabIndex = 2;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "True / False";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.trueFalse.AutoSize = true;
+            this.trueFalse.Location = new System.Drawing.Point(13, 4);
+            this.trueFalse.Margin = new System.Windows.Forms.Padding(4);
+            this.trueFalse.Name = "radioButton1";
+            this.trueFalse.Size = new System.Drawing.Size(105, 21);
+            this.trueFalse.TabIndex = 2;
+            this.trueFalse.TabStop = true;
+            this.trueFalse.Text = "True / False";
+            this.trueFalse.UseVisualStyleBackColor = true;
+            this.trueFalse.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
-            // radioButton2
+            // multipleChoice
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(135, 4);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(4);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(122, 21);
-            this.radioButton2.TabIndex = 3;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Multiple choice";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.multipleChoice.AutoSize = true;
+            this.multipleChoice.Location = new System.Drawing.Point(135, 4);
+            this.multipleChoice.Margin = new System.Windows.Forms.Padding(4);
+            this.multipleChoice.Name = "radioButton2";
+            this.multipleChoice.Size = new System.Drawing.Size(122, 21);
+            this.multipleChoice.TabIndex = 3;
+            this.multipleChoice.TabStop = true;
+            this.multipleChoice.Text = "Multiple choice";
+            this.multipleChoice.UseVisualStyleBackColor = true;
+            this.multipleChoice.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.radioButton2);
-            this.panel1.Controls.Add(this.radioButton1);
+            this.panel1.Controls.Add(this.multipleChoice);
+            this.panel1.Controls.Add(this.trueFalse);
             this.panel1.Location = new System.Drawing.Point(20, 126);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
@@ -118,18 +118,18 @@
             // 
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.checkBox5);
-            this.panel2.Controls.Add(this.checkBox4);
-            this.panel2.Controls.Add(this.checkBox3);
-            this.panel2.Controls.Add(this.checkBox2);
-            this.panel2.Controls.Add(this.checkBox1);
+            this.panel2.Controls.Add(this.answerEIsCorrect);
+            this.panel2.Controls.Add(this.answerDIsCorrect);
+            this.panel2.Controls.Add(this.answerCIsCorrect);
+            this.panel2.Controls.Add(this.answerBIsCorrect);
+            this.panel2.Controls.Add(this.answerAIsCorrect);
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.textBox6);
-            this.panel2.Controls.Add(this.textBox5);
-            this.panel2.Controls.Add(this.textBox4);
-            this.panel2.Controls.Add(this.textBox3);
-            this.panel2.Controls.Add(this.textBox2);
+            this.panel2.Controls.Add(this.answerE);
+            this.panel2.Controls.Add(this.answerD);
+            this.panel2.Controls.Add(this.answerC);
+            this.panel2.Controls.Add(this.answerB);
+            this.panel2.Controls.Add(this.answerA);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label4);
@@ -160,55 +160,55 @@
             this.label8.TabIndex = 15;
             this.label8.Text = "Possible answers";
             // 
-            // checkBox5
+            // answerEIsCorrect
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(528, 234);
-            this.checkBox5.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(18, 17);
-            this.checkBox5.TabIndex = 14;
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.answerEIsCorrect.AutoSize = true;
+            this.answerEIsCorrect.Location = new System.Drawing.Point(528, 234);
+            this.answerEIsCorrect.Margin = new System.Windows.Forms.Padding(4);
+            this.answerEIsCorrect.Name = "checkBox5";
+            this.answerEIsCorrect.Size = new System.Drawing.Size(18, 17);
+            this.answerEIsCorrect.TabIndex = 14;
+            this.answerEIsCorrect.UseVisualStyleBackColor = true;
             // 
-            // checkBox4
+            // answerDIsCorrect
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(528, 189);
-            this.checkBox4.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(18, 17);
-            this.checkBox4.TabIndex = 13;
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.answerDIsCorrect.AutoSize = true;
+            this.answerDIsCorrect.Location = new System.Drawing.Point(528, 189);
+            this.answerDIsCorrect.Margin = new System.Windows.Forms.Padding(4);
+            this.answerDIsCorrect.Name = "checkBox4";
+            this.answerDIsCorrect.Size = new System.Drawing.Size(18, 17);
+            this.answerDIsCorrect.TabIndex = 13;
+            this.answerDIsCorrect.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // answerCIsCorrect
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(528, 144);
-            this.checkBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(18, 17);
-            this.checkBox3.TabIndex = 12;
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.answerCIsCorrect.AutoSize = true;
+            this.answerCIsCorrect.Location = new System.Drawing.Point(528, 144);
+            this.answerCIsCorrect.Margin = new System.Windows.Forms.Padding(4);
+            this.answerCIsCorrect.Name = "checkBox3";
+            this.answerCIsCorrect.Size = new System.Drawing.Size(18, 17);
+            this.answerCIsCorrect.TabIndex = 12;
+            this.answerCIsCorrect.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // answerBIsCorrect
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(528, 100);
-            this.checkBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(18, 17);
-            this.checkBox2.TabIndex = 11;
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.answerBIsCorrect.AutoSize = true;
+            this.answerBIsCorrect.Location = new System.Drawing.Point(528, 100);
+            this.answerBIsCorrect.Margin = new System.Windows.Forms.Padding(4);
+            this.answerBIsCorrect.Name = "checkBox2";
+            this.answerBIsCorrect.Size = new System.Drawing.Size(18, 17);
+            this.answerBIsCorrect.TabIndex = 11;
+            this.answerBIsCorrect.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // answerAIsCorrect
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(528, 57);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(18, 17);
-            this.checkBox1.TabIndex = 10;
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.answerAIsCorrect.AutoSize = true;
+            this.answerAIsCorrect.Location = new System.Drawing.Point(528, 57);
+            this.answerAIsCorrect.Margin = new System.Windows.Forms.Padding(4);
+            this.answerAIsCorrect.Name = "checkBox1";
+            this.answerAIsCorrect.Size = new System.Drawing.Size(18, 17);
+            this.answerAIsCorrect.TabIndex = 10;
+            this.answerAIsCorrect.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
@@ -232,45 +232,45 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox6
+            // answerE
             // 
-            this.textBox6.Location = new System.Drawing.Point(37, 232);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(464, 22);
-            this.textBox6.TabIndex = 9;
+            this.answerE.Location = new System.Drawing.Point(37, 232);
+            this.answerE.Margin = new System.Windows.Forms.Padding(4);
+            this.answerE.Name = "textBox6";
+            this.answerE.Size = new System.Drawing.Size(464, 22);
+            this.answerE.TabIndex = 9;
             // 
-            // textBox5
+            // answerD
             // 
-            this.textBox5.Location = new System.Drawing.Point(35, 188);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(466, 22);
-            this.textBox5.TabIndex = 8;
+            this.answerD.Location = new System.Drawing.Point(35, 188);
+            this.answerD.Margin = new System.Windows.Forms.Padding(4);
+            this.answerD.Name = "textBox5";
+            this.answerD.Size = new System.Drawing.Size(466, 22);
+            this.answerD.TabIndex = 8;
             // 
-            // textBox4
+            // answerC
             // 
-            this.textBox4.Location = new System.Drawing.Point(33, 144);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(468, 22);
-            this.textBox4.TabIndex = 7;
+            this.answerC.Location = new System.Drawing.Point(33, 144);
+            this.answerC.Margin = new System.Windows.Forms.Padding(4);
+            this.answerC.Name = "textBox4";
+            this.answerC.Size = new System.Drawing.Size(468, 22);
+            this.answerC.TabIndex = 7;
             // 
-            // textBox3
+            // answerB
             // 
-            this.textBox3.Location = new System.Drawing.Point(33, 100);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(468, 22);
-            this.textBox3.TabIndex = 6;
+            this.answerB.Location = new System.Drawing.Point(33, 100);
+            this.answerB.Margin = new System.Windows.Forms.Padding(4);
+            this.answerB.Name = "textBox3";
+            this.answerB.Size = new System.Drawing.Size(468, 22);
+            this.answerB.TabIndex = 6;
             // 
-            // textBox2
+            // answerA
             // 
-            this.textBox2.Location = new System.Drawing.Point(33, 55);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(468, 22);
-            this.textBox2.TabIndex = 5;
+            this.answerA.Location = new System.Drawing.Point(33, 55);
+            this.answerA.Margin = new System.Windows.Forms.Padding(4);
+            this.answerA.Name = "textBox2";
+            this.answerA.Size = new System.Drawing.Size(468, 22);
+            this.answerA.TabIndex = 5;
             // 
             // label6
             // 
@@ -327,8 +327,8 @@
             this.panel3.Controls.Add(this.label7);
             this.panel3.Controls.Add(this.button3);
             this.panel3.Controls.Add(this.button4);
-            this.panel3.Controls.Add(this.radioButton4);
-            this.panel3.Controls.Add(this.radioButton3);
+            this.panel3.Controls.Add(this.answerFalse);
+            this.panel3.Controls.Add(this.answerTrue);
             this.panel3.Location = new System.Drawing.Point(19, 164);
             this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
@@ -367,29 +367,29 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button1_Click);
             // 
-            // radioButton4
+            // answerFalse
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(80, 33);
-            this.radioButton4.Margin = new System.Windows.Forms.Padding(4);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(63, 21);
-            this.radioButton4.TabIndex = 1;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "False";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.answerFalse.AutoSize = true;
+            this.answerFalse.Location = new System.Drawing.Point(80, 33);
+            this.answerFalse.Margin = new System.Windows.Forms.Padding(4);
+            this.answerFalse.Name = "radioButton4";
+            this.answerFalse.Size = new System.Drawing.Size(63, 21);
+            this.answerFalse.TabIndex = 1;
+            this.answerFalse.TabStop = true;
+            this.answerFalse.Text = "False";
+            this.answerFalse.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // answerTrue
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(13, 31);
-            this.radioButton3.Margin = new System.Windows.Forms.Padding(4);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(59, 21);
-            this.radioButton3.TabIndex = 0;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "True";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.answerTrue.AutoSize = true;
+            this.answerTrue.Location = new System.Drawing.Point(13, 31);
+            this.answerTrue.Margin = new System.Windows.Forms.Padding(4);
+            this.answerTrue.Name = "radioButton3";
+            this.answerTrue.Size = new System.Drawing.Size(59, 21);
+            this.answerTrue.TabIndex = 0;
+            this.answerTrue.TabStop = true;
+            this.answerTrue.Text = "True";
+            this.answerTrue.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -401,7 +401,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.question);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
@@ -423,9 +423,9 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.TextBox question;
+        private System.Windows.Forms.RadioButton trueFalse;
+        private System.Windows.Forms.RadioButton multipleChoice;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label5;
@@ -433,23 +433,23 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox answerE;
+        private System.Windows.Forms.TextBox answerD;
+        private System.Windows.Forms.TextBox answerC;
+        private System.Windows.Forms.TextBox answerB;
+        private System.Windows.Forms.TextBox answerA;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox answerAIsCorrect;
+        private System.Windows.Forms.CheckBox answerEIsCorrect;
+        private System.Windows.Forms.CheckBox answerDIsCorrect;
+        private System.Windows.Forms.CheckBox answerCIsCorrect;
+        private System.Windows.Forms.CheckBox answerBIsCorrect;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton answerFalse;
+        private System.Windows.Forms.RadioButton answerTrue;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
