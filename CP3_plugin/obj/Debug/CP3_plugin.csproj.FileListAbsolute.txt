@@ -20,3 +20,16 @@ D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.Properties.R
 D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.csproj.GenerateResource.Cache
 D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.dll
 D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.pdb
+C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\bin\Debug\CP3_plugin.dll
+C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\bin\Debug\CP3_plugin.pdb
+C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\bin\Debug\CP3_plugin.dll.manifest
+C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\bin\Debug\CP3_plugin.vsto
+C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\obj\Debug\CP3_plugin.csprojResolveAssemblyReference.cache
+C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\obj\Debug\CP3_plugin.cp3_ribbon.resources
+C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\obj\Debug\CP3_plugin.Form1.resources
+C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\obj\Debug\CP3_plugin.Properties.Resources.resources
+C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\obj\Debug\CP3_plugin.csproj.GenerateResource.Cache
+C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\obj\Debug\CP3_plugin.dll
+C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\obj\Debug\CP3_plugin.pdb

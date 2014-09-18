@@ -1,4 +1,4 @@
-﻿using Microsoft.Office.Core;
+using Microsoft.Office.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,21 +39,25 @@ namespace CP3_plugin {
         // insert meta data and close form
         private void button1_Click(object sender, EventArgs e)
         {
+            // add new slide with metadata here
+            addPoll();
+            Close();
+        }
+
+        private void addPoll() {
             PowerPoint.Application ppApp = Globals.ThisAddIn.Application;
             PowerPoint.SlideRange ppSR = ppApp.ActiveWindow.Selection.SlideRange;
-            // Poll slide label
-            ppSR.Shapes.AddLabel(MsoTextOrientation.msoTextOrientationHorizontal, 10, 10, 100, 100).TextFrame.TextRange.Text = "POLL SLIDE";
 
             // get data from dialog
-            int slideIndex = ppSR.SlideIndex;
+            int slideIndex = ppApp.ActiveWindow.View.Slide.SlideIndex + 1;
             string question = QuestionBox.Text;
-            string ans1, ans2, ans3, ans4, ans5;
             string answerString = "";
             string correctAnswer = "";
+            string[] answers;
 
             if (format1.Checked){
                 // true or false                
-                if (TrueRadio.Checked){
+                if (trueRadio.Checked){
                     correctAnswer = "true";
                 } else if (falseRadio.Checked) {
                     correctAnswer = "false";
@@ -64,34 +68,38 @@ namespace CP3_plugin {
                     MessageBox.Show("There was no correct answer selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     return;
                 }
-            }else if (format2.Checked) {
-                // multiple choice
-                ans1 = textBox2.Text;
-                answerString = answerString + "<Answer1>" + ans1 + "</Answer1>";
-                if (checkBox1.Checked) correctAnswer = correctAnswer + "A,";
-
-                ans2 = textBox3.Text;
-                answerString = answerString + "<Answer2>" + ans2 + "</Answer2>";
-                if (checkBox2.Checked) correctAnswer = correctAnswer + "B,";
-
-                ans3 = textBox4.Text;
-                answerString = answerString + "<Answer3>" + ans3 + "</Answer3>";
-                if (checkBox3.Checked) correctAnswer = correctAnswer + "C,";
-
-                ans4 = textBox5.Text;
-                answerString = answerString + "<Answer4>" + ans4 + "</Answer4>";
-                if (checkBox4.Checked) correctAnswer = correctAnswer + "D,";
-
-                ans5 = textBox6.Text;
-                answerString = answerString + "<Answer5>" + ans5 + "</Answer5>";
-                if (checkBox5.Checked) correctAnswer = correctAnswer + "E";
-
-                if (checkBox1.Checked == false && checkBox2.Checked == false && checkBox3.Checked == false && checkBox4.Checked == false && checkBox5.Checked == false)
+                // Populate the answers array
+                answers =  new string[] {"true", "false"};
+            }else if (format2.Checked) {// multiple choice
+                // First check to make sure we have at least one 'correct' answer
+                if (answerAIsCorrect.Checked == false && answerBIsCorrect.Checked == false && answerCIsCorrect.Checked == false && answerDIsCorrect.Checked == false && answerEIsCorrect.Checked == false)
                 {
                     // error must select correct answer first
                     MessageBox.Show("There was no correct answer selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     return;
                 }
+
+                // Populate the array of answers
+                answers = new string[]{answerA.Text, answerB.Text, answerC.Text, answerD.Text, answerE.Text};
+                // Iterate through the array
+                for (int i = 1; i <= answers.Length; ++i)
+                {
+                    // Add each answer to the answer string
+                    answerString += "<Answer" + i + ">" + answers[i-1] + "</Answer" + i + ">";
+                }
+                if (answerAIsCorrect.Checked) correctAnswer = correctAnswer + "A,";
+
+                if (answerBIsCorrect.Checked) correctAnswer = correctAnswer + "B,";
+
+                if (answerCIsCorrect.Checked) correctAnswer = correctAnswer + "C,";
+
+                if (answerDIsCorrect.Checked) correctAnswer = correctAnswer + "D,";
+
+                if (answerEIsCorrect.Checked) correctAnswer = correctAnswer + "E";
+            } else { // No format selected; shouldn't ever occur
+                // error must select correct answer first
+                MessageBox.Show("You must specify a question format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
             }
 
             // create custom xml tag and insert
@@ -109,8 +117,50 @@ namespace CP3_plugin {
             //CustomXMLPart tmp = ppSR.CustomerData._Index(1);
             //MessageBox.Show(tmp.SelectSingleNode("/CP3Poll/PollQuestion").Text, "Poll Question", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
-            Close();
-                        
+            // Add slide to presentation
+            addPollSlide(ppApp, format1.Checked, QuestionBox.Text, answers);
+        }
+
+        private void addPollSlide(PowerPoint.Application application, bool isTrueFalse, string question, string[] answers)
+        {
+            // Get access to the presentation
+            PowerPoint.Presentation presentation = application.ActivePresentation;
+
+            // Add a new blank slide to the current index + 1.
+            // NOTE: I know it's bad practice to hard code the 7 as the index, but I have yet to figure out how to stably get access to the 
+            // blank layout for this function using something else
+            var sld = presentation.Slides.AddSlide(application.ActiveWindow.View.Slide.SlideIndex + 1, presentation.SlideMaster.CustomLayouts[7]);
+            var shapes = sld.Shapes;
+            
+            // Add a new textbox for the question
+            Microsoft.Office.Interop.PowerPoint.Shape questionShape = shapes.AddTextbox(
+                MsoTextOrientation.msoTextOrientationHorizontal, 100, 100, 500, 50);
+            questionShape.TextFrame.TextRange.InsertAfter(question);
+            // Add a new textbox for the answers
+            Microsoft.Office.Interop.PowerPoint.Shape answersShape = shapes.AddTextbox(
+                MsoTextOrientation.msoTextOrientationHorizontal, 100, 170, 500, 50);
+
+            // Initialize possible answers with an empty string
+            string possibleAnswers = "";
+            if (isTrueFalse) { // Format of question is true / false
+                possibleAnswers = "- True\n\n- False";
+            } else { // Multiple choice
+                // Use an array of letters to prepend to each question. Just way
+                // nicer to loop
+                string[] letters = new string[] { "A) ", "B) ", "C) ", "D) ", "E) " };
+                for (int i = 0; i < answers.Length; ++i) {
+                    if (answers[i] != "")
+                    {
+                        possibleAnswers += letters[i] + answers[i] + "\n\n";
+                    }
+                }
+            }
+            // Add the possible answers to the slide
+            answersShape.TextFrame.TextRange.InsertAfter(possibleAnswers);
+            // Go to the newly-created slide
+            application.ActiveWindow.View.GotoSlide(sld.SlideIndex);
+            // TODO: update status bar?
+            // [Note: Based on this: http://www.pcreview.co.uk/forums/acessing-powerpoint-status-bar-via-vba-t3380533.html it's not possible in 2013]
         }
     }
 }
