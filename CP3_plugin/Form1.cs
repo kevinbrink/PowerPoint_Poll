@@ -45,11 +45,20 @@ namespace CP3_plugin {
         }
 
         private void addPoll() {
+            // Get access to the presentation
             PowerPoint.Application ppApp = Globals.ThisAddIn.Application;
+            PowerPoint.Presentation presentation = ppApp.ActivePresentation;
+
+            // add new slide and make it active
+            // NOTE: I know it's bad practice to hard code the 7 as the index, but I have yet to figure out how to stably get access to the custom layout
+            var sld = presentation.Slides.AddSlide(ppApp.ActiveWindow.View.Slide.SlideIndex + 1, presentation.SlideMaster.CustomLayouts[7]);
+            ppApp.ActiveWindow.View.GotoSlide(sld.SlideIndex);
+            
+            // get current active slide
             PowerPoint.SlideRange ppSR = ppApp.ActiveWindow.Selection.SlideRange;
 
             // get data from dialog
-            int slideIndex = ppApp.ActiveWindow.View.Slide.SlideIndex + 1;
+            int slideIndex = ppApp.ActiveWindow.View.Slide.SlideIndex;
             string question = QuestionBox.Text;
             string answerString = "";
             string correctAnswer = "";
@@ -117,19 +126,13 @@ namespace CP3_plugin {
             //CustomXMLPart tmp = ppSR.CustomerData._Index(1);
             //MessageBox.Show(tmp.SelectSingleNode("/CP3Poll/PollQuestion").Text, "Poll Question", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
-            // Add slide to presentation
+            // Add Text to slide
             addPollSlide(ppApp, format1.Checked, QuestionBox.Text, answers);
         }
 
         private void addPollSlide(PowerPoint.Application application, bool isTrueFalse, string question, string[] answers)
-        {
-            // Get access to the presentation
-            PowerPoint.Presentation presentation = application.ActivePresentation;
-
-            // Add a new blank slide to the current index + 1.
-            // NOTE: I know it's bad practice to hard code the 7 as the index, but I have yet to figure out how to stably get access to the 
-            // blank layout for this function using something else
-            var sld = presentation.Slides.AddSlide(application.ActiveWindow.View.Slide.SlideIndex + 1, presentation.SlideMaster.CustomLayouts[7]);
+        {            
+            PowerPoint.SlideRange sld = application.ActiveWindow.Selection.SlideRange;
             var shapes = sld.Shapes;
             
             // Add a new textbox for the question
@@ -156,9 +159,7 @@ namespace CP3_plugin {
                 }
             }
             // Add the possible answers to the slide
-            answersShape.TextFrame.TextRange.InsertAfter(possibleAnswers);
-            // Go to the newly-created slide
-            application.ActiveWindow.View.GotoSlide(sld.SlideIndex);
+            answersShape.TextFrame.TextRange.InsertAfter(possibleAnswers);            
             // TODO: update status bar?
             // [Note: Based on this: http://www.pcreview.co.uk/forums/acessing-powerpoint-status-bar-via-vba-t3380533.html it's not possible in 2013]
         }

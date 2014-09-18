@@ -8,18 +8,6 @@ C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.Properties.R
 C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.csproj.GenerateResource.Cache
 C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.dll
 C:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.pdb
-D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\bin\Debug\CP3_plugin.dll
-D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\bin\Debug\CP3_plugin.pdb
-D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\bin\Debug\CP3_plugin.dll.manifest
-D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\bin\Debug\CP3_plugin.vsto
-D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
-D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
-D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.cp3_ribbon.resources
-D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.Form1.resources
-D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.Properties.Resources.resources
-D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.csproj.GenerateResource.Cache
-D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.dll
-D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.pdb
 C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\bin\Debug\CP3_plugin.dll
 C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\bin\Debug\CP3_plugin.pdb
 C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\bin\Debug\CP3_plugin.dll.manifest
@@ -33,3 +21,15 @@ C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\obj\Debug\CP3
 C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\obj\Debug\CP3_plugin.csproj.GenerateResource.Cache
 C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\obj\Debug\CP3_plugin.dll
 C:\Users\Kevin\Documents\School\Project\PowerPoint_Poll\CP3_plugin\obj\Debug\CP3_plugin.pdb
+D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\bin\Debug\CP3_plugin.dll
+D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\bin\Debug\CP3_plugin.pdb
+D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\bin\Debug\CP3_plugin.dll.manifest
+D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\bin\Debug\CP3_plugin.vsto
+D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.xml
+D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.cp3_ribbon.resources
+D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.Form1.resources
+D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.Properties.Resources.resources
+D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.csproj.GenerateResource.Cache
+D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.dll
+D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.pdb
