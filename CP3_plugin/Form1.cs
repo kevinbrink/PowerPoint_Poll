@@ -41,6 +41,8 @@ namespace CP3_plugin {
         {
             PowerPoint.Application ppApp = Globals.ThisAddIn.Application;
             PowerPoint.SlideRange ppSR = ppApp.ActiveWindow.Selection.SlideRange;
+            // Poll slide label
+            ppSR.Shapes.AddLabel(MsoTextOrientation.msoTextOrientationHorizontal, 10, 10, 100, 100).TextFrame.TextRange.Text = "POLL SLIDE";
 
             // get data from dialog
             int slideIndex = ppSR.SlideIndex;
@@ -98,12 +100,17 @@ namespace CP3_plugin {
             CustomXMLPart pollData = ppSR.CustomerData.Add();
             if (format1.Checked)
             {
-                pollData.LoadXML("<Poll><PollSlide>" + slideIndex + "</PollSlide><PollType>True or False</PollType><PollQuestion>" + question + "</PollQuestion><PollCorrectAnswer>" + correctAnswer + "</PollCorrectAnswer></Poll>");
+                pollData.LoadXML("<?xml version=\"1.0\" encoding=\"utf-8\" ?><CP3Poll><PollSlide>" + slideIndex + "</PollSlide><PollType>True or False</PollType><PollQuestion>" + question + "</PollQuestion><PollCorrectAnswer>" + correctAnswer + "</PollCorrectAnswer></CP3Poll>");
             } else {
-                pollData.LoadXML("<Poll><PollSlide>" + slideIndex + "</PollSlide><PollType>Multiple choice</PollType><PollQuestion>" + question + "</PollQuestion><PollAnswers>" + answerString + "</PollAnswers><PollCorrectAnswer>" + correctAnswer + "</PollCorrectAnswer></Poll>");
-            }            
+                pollData.LoadXML("<?xml version=\"1.0\" encoding=\"utf-8\" ?><CP3Poll><PollSlide>" + slideIndex + "</PollSlide><PollType>Multiple choice</PollType><PollQuestion>" + question + "</PollQuestion><PollAnswers>" + answerString + "</PollAnswers><PollCorrectAnswer>" + correctAnswer + "</PollCorrectAnswer></CP3Poll>");
+            }                        
+
+            // How to read XML data
+            //CustomXMLPart tmp = ppSR.CustomerData._Index(1);
+            //MessageBox.Show(tmp.SelectSingleNode("/CP3Poll/PollQuestion").Text, "Poll Question", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
             Close();
+                        
         }
     }
 }

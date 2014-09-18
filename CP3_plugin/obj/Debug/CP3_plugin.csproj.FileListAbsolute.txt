@@ -20,4 +20,3 @@ D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.Properties.R
 D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.csproj.GenerateResource.Cache
 D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.dll
 D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.pdb
-D:\Dropbox\VS_Workspace\CP3 Project\CP3_plugin\obj\Debug\CP3_plugin.csprojResolveAssemblyReference.cache
