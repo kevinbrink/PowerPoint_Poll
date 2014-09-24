@@ -31,7 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(cp3_ribbon));
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.button1 = this.Factory.CreateRibbonButton();
+            this.insertPoll = this.Factory.CreateRibbonButton();
+            this.editPoll = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             // 
@@ -44,18 +45,28 @@
             // 
             // group1
             // 
-            this.group1.Items.Add(this.button1);
+            this.group1.Items.Add(this.insertPoll);
+            this.group1.Items.Add(this.editPoll);
             this.group1.Name = "group1";
             // 
-            // button1
+            // insertPoll
             // 
-            this.button1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.KeyTip = "P";
-            this.button1.Label = "Insert Poll";
-            this.button1.Name = "button1";
-            this.button1.ShowImage = true;
-            this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
+            this.insertPoll.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.insertPoll.Image = ((System.Drawing.Image)(resources.GetObject("insertPoll.Image")));
+            this.insertPoll.KeyTip = "P";
+            this.insertPoll.Label = "Insert Poll";
+            this.insertPoll.Name = "insertPoll";
+            this.insertPoll.ShowImage = true;
+            this.insertPoll.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
+            // 
+            // editPoll
+            // 
+            this.editPoll.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.editPoll.Image = ((System.Drawing.Image)(resources.GetObject("editPoll.Image")));
+            this.editPoll.Label = "Edit Poll";
+            this.editPoll.Name = "editPoll";
+            this.editPoll.ShowImage = true;
+            this.editPoll.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.editPoll_Click);
             // 
             // cp3_ribbon
             // 
@@ -74,7 +85,8 @@
 
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton insertPoll;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton editPoll;
     }
 
     partial class ThisRibbonCollection {

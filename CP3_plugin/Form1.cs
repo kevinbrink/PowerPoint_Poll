@@ -10,9 +10,45 @@ using System.Windows.Forms;
 using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 
 namespace CP3_plugin {
-    public partial class Form1 : Form { 
+    public partial class Form1 : Form {
+        private bool editing = false;
+ 
         public Form1() {
             InitializeComponent();
+        }
+
+        // A different constructor for editing polls
+        public Form1(string question, string correctAnswer, string answers = null)
+        {
+            // Initialize everything
+            InitializeComponent();
+
+            editing = true; // We are editing 
+
+            // Setup the variables
+            QuestionBox.Text = question;
+            // If we didn't have answers, we know it's a true/false
+            if (answers == null)
+            {
+                format1.Checked = true;
+                // If true is correct
+                if (Convert.ToBoolean(correctAnswer))
+                {
+                    trueRadio.Checked = true;
+                }
+                else
+                {
+                    falseRadio.Checked = true;
+                }
+                button4.Text = "Update Poll";
+            }
+            else
+            { // Multiple choice
+
+                button1.Text = "Update Poll";
+            }
+            //this.correctAnswer = correctAnswer;
+            //this.answers = answers;
         }
 
         // show answer field based on radio buttons
@@ -39,22 +75,32 @@ namespace CP3_plugin {
         // insert meta data and close form
         private void button1_Click(object sender, EventArgs e)
         {
-            // add new slide with metadata here
-            addPoll();
+            // add or edit new slide with metadata here
+            addOrUpdatePoll();
             Close();
         }
 
-        private void addPoll() {
+        private void addOrUpdatePoll() {
             // Get access to the presentation
             PowerPoint.Application ppApp = Globals.ThisAddIn.Application;
             PowerPoint.Presentation presentation = ppApp.ActivePresentation;
+            PowerPoint.Slide sld;
 
-            // add new slide and make it active
-            // NOTE: I know it's bad practice to hard code the 7 as the index, but I have yet to figure out how to stably get access to the custom layout
-            var sld = presentation.Slides.AddSlide(ppApp.ActiveWindow.View.Slide.SlideIndex + 1, presentation.SlideMaster.CustomLayouts[7]);
-            ppApp.ActiveWindow.View.GotoSlide(sld.SlideIndex);
+            if (!editing)
+            {
+                // add new slide and make it active
+                // NOTE: I know it's bad practice to hard code the 7 as the index, but I have yet to figure out how to stably get access to the custom layout
+                sld = presentation.Slides.AddSlide(ppApp.ActiveWindow.View.Slide.SlideIndex + 1, presentation.SlideMaster.CustomLayouts[7]);
+                ppApp.ActiveWindow.View.GotoSlide(sld.SlideIndex);
+            }
+            else
+            {
+                // Get the current slide
+                sld = ppApp.ActiveWindow.View.Slide;
+            }
             
             // get current active slide
+            // TODO: I don't tink we need this; just use pre-existing sld?
             PowerPoint.SlideRange ppSR = ppApp.ActiveWindow.Selection.SlideRange;
 
             // get data from dialog
@@ -127,22 +173,35 @@ namespace CP3_plugin {
             //MessageBox.Show(tmp.SelectSingleNode("/CP3Poll/PollQuestion").Text, "Poll Question", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
             // Add Text to slide
-            addPollSlide(ppApp, format1.Checked, QuestionBox.Text, answers);
+            addOrUpdatePollSlide(ppApp, format1.Checked, QuestionBox.Text, answers);
         }
 
-        private void addPollSlide(PowerPoint.Application application, bool isTrueFalse, string question, string[] answers)
+        private void addOrUpdatePollSlide(PowerPoint.Application application, bool isTrueFalse, string question, string[] answers)
         {            
             PowerPoint.SlideRange sld = application.ActiveWindow.Selection.SlideRange;
             var shapes = sld.Shapes;
-            
-            // Add a new textbox for the question
-            Microsoft.Office.Interop.PowerPoint.Shape questionShape = shapes.AddTextbox(
-                MsoTextOrientation.msoTextOrientationHorizontal, 100, 100, 500, 50);
-            questionShape.TextFrame.TextRange.InsertAfter(question);
-            // Add a new textbox for the answers
-            Microsoft.Office.Interop.PowerPoint.Shape answersShape = shapes.AddTextbox(
-                MsoTextOrientation.msoTextOrientationHorizontal, 100, 170, 500, 50);
+            Microsoft.Office.Interop.PowerPoint.Shape questionShape;
+            Microsoft.Office.Interop.PowerPoint.Shape answersShape;
 
+            if (editing)
+            {
+                // TODO: Decide if this is good enough; assumes that user won't modify the slide :P
+                // First shape should be the question
+                questionShape = shapes[0];
+                // Second should be answers
+                answersShape = shapes[1];
+            }
+            else
+            {
+                // Add a new textbox for the question
+                questionShape = shapes.AddTextbox(
+                    MsoTextOrientation.msoTextOrientationHorizontal, 100, 100, 500, 50);
+                // Add a new textbox for the answers
+                answersShape = shapes.AddTextbox(
+                    MsoTextOrientation.msoTextOrientationHorizontal, 100, 170, 500, 50);
+            }
+            questionShape.TextFrame.TextRange.Text = question;
+            
             // Initialize possible answers with an empty string
             string possibleAnswers = "";
             if (isTrueFalse) { // Format of question is true / false
@@ -159,7 +218,7 @@ namespace CP3_plugin {
                 }
             }
             // Add the possible answers to the slide
-            answersShape.TextFrame.TextRange.InsertAfter(possibleAnswers);            
+            answersShape.TextFrame.TextRange.Text = possibleAnswers;
             // TODO: update status bar?
             // [Note: Based on this: http://www.pcreview.co.uk/forums/acessing-powerpoint-status-bar-via-vba-t3380533.html it's not possible in 2013]
         }
