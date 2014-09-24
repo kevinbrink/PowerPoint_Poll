@@ -76,11 +76,32 @@ namespace CP3_plugin {
         private void button1_Click(object sender, EventArgs e)
         {
             // add or edit new slide with metadata here
-            addOrUpdatePoll();
-            Close();
+            addOrUpdatePoll();            
         }
 
         private void addOrUpdatePoll() {
+            // Error checking first
+            if (QuestionBox.Text.Length == 0)
+            {
+                MessageBox.Show("The Question is missing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
+
+            // First check to make sure we have at least one 'correct' answer
+            if (format2.Checked && answerAIsCorrect.Checked == false && answerBIsCorrect.Checked == false && answerCIsCorrect.Checked == false && answerDIsCorrect.Checked == false && answerEIsCorrect.Checked == false)
+            {
+                // error must select correct answer first
+                MessageBox.Show("There was no correct answer selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
+
+            if (format1.Checked && !trueRadio.Checked && !falseRadio.Checked)
+            {
+                // error must select correct answer first
+                MessageBox.Show("There was no correct answer selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
+
             // Get access to the presentation
             PowerPoint.Application ppApp = Globals.ThisAddIn.Application;
             PowerPoint.Presentation presentation = ppApp.ActivePresentation;
@@ -117,23 +138,11 @@ namespace CP3_plugin {
                 } else if (falseRadio.Checked) {
                     correctAnswer = "false";
                 }
-                else
-                {
-                    // error must select correct answer first
-                    MessageBox.Show("There was no correct answer selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    return;
-                }
+                
                 // Populate the answers array
                 answers =  new string[] {"true", "false"};
             }else if (format2.Checked) {// multiple choice
-                // First check to make sure we have at least one 'correct' answer
-                if (answerAIsCorrect.Checked == false && answerBIsCorrect.Checked == false && answerCIsCorrect.Checked == false && answerDIsCorrect.Checked == false && answerEIsCorrect.Checked == false)
-                {
-                    // error must select correct answer first
-                    MessageBox.Show("There was no correct answer selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    return;
-                }
-
+                
                 // Populate the array of answers
                 answers = new string[]{answerA.Text, answerB.Text, answerC.Text, answerD.Text, answerE.Text};
                 // Iterate through the array
@@ -174,6 +183,8 @@ namespace CP3_plugin {
 
             // Add Text to slide
             addOrUpdatePollSlide(ppApp, format1.Checked, QuestionBox.Text, answers);
+            
+            Close(); // the dialog
         }
 
         private void addOrUpdatePollSlide(PowerPoint.Application application, bool isTrueFalse, string question, string[] answers)
