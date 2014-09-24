@@ -10,8 +10,11 @@ using System.Windows.Forms;
 using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 
 namespace CP3_plugin {
-    public partial class Form1 : Form { 
-        public Form1() {
+    public partial class Question : Form {
+        int number; // The question number in this poll
+        public Question(int number) {
+            this.number = number;
+            this.Text = "Question #" + number + " Options";
             InitializeComponent();
         }
 
@@ -50,7 +53,7 @@ namespace CP3_plugin {
             PowerPoint.Presentation presentation = ppApp.ActivePresentation;
 
             // add new slide and make it active
-            // NOTE: I know it's bad practice to hard code the 7 as the index, but I have yet to figure out how to stably get access to the custom layout
+            // NOTE: I know it's bad practice to hard code the 7 as the index, but I have yet to figure out how to stably get access to the blank custom layout
             var sld = presentation.Slides.AddSlide(ppApp.ActiveWindow.View.Slide.SlideIndex + 1, presentation.SlideMaster.CustomLayouts[7]);
             ppApp.ActiveWindow.View.GotoSlide(sld.SlideIndex);
             
@@ -124,7 +127,7 @@ namespace CP3_plugin {
 
             // How to read XML data
             //CustomXMLPart tmp = ppSR.CustomerData._Index(1);
-            //MessageBox.Show(tmp.SelectSingleNode("/CP3Poll/PollQuestion").Text, "Poll Question", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            //MessageBox.Show(tmp.SelectSingleNode("/CP3Poll/PollQuestion").Text, "Question Question", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
             // Add Text to slide
             addPollSlide(ppApp, format1.Checked, QuestionBox.Text, answers);
