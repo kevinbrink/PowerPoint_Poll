@@ -36,7 +36,13 @@ namespace CP3_plugin {
                 // TODO: Change this question type thing to an enum
                 if (type.ToLower().Contains("multiple choice"))
                 {
-                    string answers = xml.SelectSingleNode("/CP3Poll/PollAnswers").Text;
+                    string[] answers = new string[5];
+                    // Iterate through each possible correctAnswer
+                    for (int i = 1; i <= 5; ++i)
+                    {
+                        // Add the correctAnswer to the array
+                        answers[i-1] = xml.SelectSingleNode("/CP3Poll/PollAnswers/Answer" + i).Text;
+                    }
                     Form1 editPoll = new Form1(question, correctAnswer, answers);
                     editPoll.Show();
                 }

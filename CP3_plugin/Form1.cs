@@ -18,7 +18,7 @@ namespace CP3_plugin {
         }
 
         // A different constructor for editing polls
-        public Form1(string question, string correctAnswer, string answers = null)
+        public Form1(string question, string correctAnswers, string [] answers = null)
         {
             // Initialize everything
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace CP3_plugin {
             {
                 format1.Checked = true;
                 // If true is correct
-                if (Convert.ToBoolean(correctAnswer))
+                if (Convert.ToBoolean(correctAnswers))
                 {
                     trueRadio.Checked = true;
                 }
@@ -40,18 +40,46 @@ namespace CP3_plugin {
                 {
                     falseRadio.Checked = true;
                 }
-                button4.Text = "Update Poll";
             }
             else
             { // Multiple choice
-
-                button1.Text = "Update Poll";
+                format2.Checked = true;
+                // Iterate through each correct correctAnswer
+                foreach (string correctAnswer in correctAnswers.Split(','))
+                {
+                    // Set up each correct correctAnswer
+                    switch (correctAnswer)
+                    {
+                        case "A":
+                            answerAIsCorrect.Checked = true;
+                            break;
+                        case "B":
+                            answerBIsCorrect.Checked = true;
+                            break;
+                        case "C":
+                            answerCIsCorrect.Checked = true;
+                            break;
+                        case "D":
+                            answerDIsCorrect.Checked = true;
+                            break;
+                        case "E":
+                            answerEIsCorrect.Checked = true;
+                            break;
+                    }
+                }
+                // Set up answers
+                answerA.Text = answers[0];
+                answerB.Text = answers[1];
+                answerC.Text = answers[2];
+                answerD.Text = answers[3];
+                answerE.Text = answers[4];
+                // Update button text
             }
-            //this.correctAnswer = correctAnswer;
-            //this.answers = answers;
+            button4.Text = "Update Poll";
+            button1.Text = "Update Poll";
         }
 
-        // show answer field based on radio buttons
+        // show correctAnswer field based on radio buttons
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (((RadioButton)sender).Checked && ((RadioButton)sender).Text.Contains("True"))
@@ -87,17 +115,17 @@ namespace CP3_plugin {
                 return;
             }
 
-            // First check to make sure we have at least one 'correct' answer
+            // First check to make sure we have at least one 'correct' correctAnswer
             if (format2.Checked && answerAIsCorrect.Checked == false && answerBIsCorrect.Checked == false && answerCIsCorrect.Checked == false && answerDIsCorrect.Checked == false && answerEIsCorrect.Checked == false)
             {
-                // error must select correct answer first
+                // error must select correct correctAnswer first
                 MessageBox.Show("There was no correct answer selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 return;
             }
 
             if (format1.Checked && !trueRadio.Checked && !falseRadio.Checked)
             {
-                // error must select correct answer first
+                // error must select correct correctAnswer first
                 MessageBox.Show("There was no correct answer selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 return;
             }
@@ -121,8 +149,6 @@ namespace CP3_plugin {
             }
             
             // get current active slide
-            // TODO: I don't tink we need this; just use pre-existing sld?
-            PowerPoint.SlideRange ppSR = ppApp.ActiveWindow.Selection.SlideRange;
 
             // get data from dialog
             int slideIndex = ppApp.ActiveWindow.View.Slide.SlideIndex;
@@ -149,7 +175,7 @@ namespace CP3_plugin {
                 for (int i = 1; i <= answers.Length; ++i)
                 {
                     // Add each answer to the answer string
-                    answerString += "<Answer" + i + ">" + answers[i-1] + "</Answer" + i + ">";
+                    answerString += "<Answer" + i + ">" + answers[i - 1] + "</Answer" + i + ">";
                 }
                 if (answerAIsCorrect.Checked) correctAnswer = correctAnswer + "A,";
 
@@ -161,7 +187,7 @@ namespace CP3_plugin {
 
                 if (answerEIsCorrect.Checked) correctAnswer = correctAnswer + "E";
             } else { // No format selected; shouldn't ever occur
-                // error must select correct answer first
+                // error must select correct correctAnswer first
                 MessageBox.Show("You must specify a question format.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 return;
             }
@@ -169,17 +195,52 @@ namespace CP3_plugin {
             // create custom xml tag and insert
             //http://code.msdn.microsoft.com/office/PowerPoint-2010-Use-Custom-794ffe88
 
-            CustomXMLPart pollData = ppSR.CustomerData.Add();
-            if (format1.Checked)
+            // Edit existing
+            if (editing)
             {
-                pollData.LoadXML("<?xml version=\"1.0\" encoding=\"utf-8\" ?><CP3Poll><PollSlide>" + slideIndex + "</PollSlide><PollType>True or False</PollType><PollQuestion>" + question + "</PollQuestion><PollCorrectAnswer>" + correctAnswer + "</PollCorrectAnswer></CP3Poll>");
-            } else {
-                pollData.LoadXML("<?xml version=\"1.0\" encoding=\"utf-8\" ?><CP3Poll><PollSlide>" + slideIndex + "</PollSlide><PollType>Multiple choice</PollType><PollQuestion>" + question + "</PollQuestion><PollAnswers>" + answerString + "</PollAnswers><PollCorrectAnswer>" + correctAnswer + "</PollCorrectAnswer></CP3Poll>");
-            }                        
+                CustomXMLPart data = sld.CustomerData._Index(1);
+                data.SelectSingleNode("/CP3Poll/PollQuestion").Text = question;
+                data.SelectSingleNode("/CP3Poll/PollCorrectAnswer").Text = correctAnswer;
+                var pollAnswers = data.SelectSingleNode("/CP3Poll/PollAnswers");
+                if (format1.Checked) // True / false
+                {
+                    if (pollAnswers != null)
+                    {// We used to have pollAnswers, because it used to be a MC
+                        // Delete the node
+                        pollAnswers.Delete();
+                    }
+                    data.SelectSingleNode("/CP3Poll/PollType").Text = "True or False";
+                }
+                else
+                { // Multiple choice
+                    if (pollAnswers != null)
+                    {
+                        // It's much more straight-forward to remove all answers and re-add them, as opposed
+                        // to trying to replace xml:
+                        pollAnswers.Delete();
+                    }
+                    // Add a new node with the answer string
+                    data.SelectSingleNode("/CP3Poll").AppendChildSubtree("<PollAnswers>" + answerString + "</PollAnswers>");
+
+                    data.SelectSingleNode("/CP3Poll/PollType").Text = "Multiple choice";
+                }
+            }
+            else
+            { // New data
+                CustomXMLPart pollData = sld.CustomerData.Add();
+                if (format1.Checked)
+                {
+                    pollData.LoadXML("<?xml version=\"1.0\" encoding=\"utf-8\" ?><CP3Poll><PollSlide>" + slideIndex + "</PollSlide><PollType>True or False</PollType><PollQuestion>" + question + "</PollQuestion><PollCorrectAnswer>" + correctAnswer + "</PollCorrectAnswer></CP3Poll>");
+                }
+                else
+                {
+                    pollData.LoadXML("<?xml version=\"1.0\" encoding=\"utf-8\" ?><CP3Poll><PollSlide>" + slideIndex + "</PollSlide><PollType>Multiple choice</PollType><PollQuestion>" + question + "</PollQuestion><PollAnswers>" + answerString + "</PollAnswers><PollCorrectAnswer>" + correctAnswer + "</PollCorrectAnswer></CP3Poll>");
+                }
+            }                  
 
             // How to read XML data
-            //CustomXMLPart tmp = ppSR.CustomerData._Index(1);
-            //MessageBox.Show(tmp.SelectSingleNode("/CP3Poll/PollQuestion").Text, "Poll Question", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            //CustomXMLPart data = ppSR.CustomerData._Index(1);
+            //MessageBox.Show(data.SelectSingleNode("/CP3Poll/PollQuestion").Text, "Poll Question", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
             // Add Text to slide
             addOrUpdatePollSlide(ppApp, format1.Checked, QuestionBox.Text, answers);
@@ -196,21 +257,15 @@ namespace CP3_plugin {
 
             if (editing)
             {
-                // TODO: Decide if this is good enough; assumes that user won't modify the slide :P
-                // First shape should be the question
-                questionShape = shapes[0];
-                // Second should be answers
-                answersShape = shapes[1];
+                // Clear out all existing shapes
+                shapes.Range().Delete();
             }
-            else
-            {
-                // Add a new textbox for the question
-                questionShape = shapes.AddTextbox(
-                    MsoTextOrientation.msoTextOrientationHorizontal, 100, 100, 500, 50);
-                // Add a new textbox for the answers
-                answersShape = shapes.AddTextbox(
-                    MsoTextOrientation.msoTextOrientationHorizontal, 100, 170, 500, 50);
-            }
+            // Add a new textbox for the question
+            questionShape = shapes.AddTextbox(
+                MsoTextOrientation.msoTextOrientationHorizontal, 100, 100, 500, 50);
+            // Add a new textbox for the answers
+            answersShape = shapes.AddTextbox(
+                MsoTextOrientation.msoTextOrientationHorizontal, 100, 170, 500, 50);
             questionShape.TextFrame.TextRange.Text = question;
             
             // Initialize possible answers with an empty string
