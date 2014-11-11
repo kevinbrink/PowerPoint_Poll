@@ -213,13 +213,19 @@ namespace CP3_plugin {
             else
             { // New data
                 CustomXMLPart pollData = sld.CustomerData.Add();
-                if (format1.Checked)
+                if (format1.Checked) // True / False question
                 {
-                    pollData.LoadXML("<?xml version=\"1.0\" encoding=\"utf-8\" ?><CP3Poll><PollType>True or False</PollType><PollQuestion>" + question + "</PollQuestion><PollCorrectAnswer>" + correctAnswer + "</PollCorrectAnswer></CP3Poll>");
+                    // Load the XML for the poll into the slide
+                    pollData.LoadXML("<?xml version=\"1.0\" encoding=\"utf-8\" ?><CP3Poll><PollType>True or False</PollType><PollQuestion>" 
+                        + question + "</PollQuestion><PollCorrectAnswer>" 
+                        + correctAnswer + "</PollCorrectAnswer></CP3Poll>");
                 }
-                else
+                else // Multiple choice question
                 {
-                    pollData.LoadXML("<?xml version=\"1.0\" encoding=\"utf-8\" ?><CP3Poll><PollType>Multiple choice</PollType><PollQuestion>" + question + "</PollQuestion><PollAnswers>" + answerString + "</PollAnswers><PollCorrectAnswer>" + correctAnswer + "</PollCorrectAnswer></CP3Poll>");
+                    pollData.LoadXML("<?xml version=\"1.0\" encoding=\"utf-8\" ?><CP3Poll><PollType>Multiple choice</PollType><PollQuestion>" 
+                        + question + "</PollQuestion><PollAnswers>" 
+                        + answerString + "</PollAnswers><PollCorrectAnswer>" 
+                        + correctAnswer + "</PollCorrectAnswer></CP3Poll>");
                 }
             }                  
 
@@ -259,9 +265,29 @@ namespace CP3_plugin {
                         if (correctAnswers[i]) { // This is a correct answer
                             noCorrectAnswers = false;
                         }
+
+                        // If it's not the last answer
+                        if (i < (answers.Length - 1))
+                        { 
+                            // Check to see if this answer is a duplicate of any other answers
+                            for (int j = 0; j < answers.Length; ++j)
+                            {
+                                // If we're not comparing to the same answer
+                                if (j != i)
+                                { 
+                                    // If they are equal
+                                    if (answers[i].Equals(answers[j]))
+                                    {
+                                        return "Duplicate answers found: " + answers[i] + ". Please remove or change duplicates";
+                                    }
+                                }
+                            }
+                        }
                     } else if (correctAnswers[i]) { // We don't have an answer, but it's supposedly correct?
                         return "A blank answer has been specified as correct. Please either enter an answer, or unmark as correct";
                     }
+
+                    
                 }
                 if (numAnswers < 2) {
                     return "The number of answers is less than two. Please specificy at least two possible answers";
