@@ -109,25 +109,11 @@ namespace CP3_plugin {
 
         private void addOrUpdatePoll() {
             // Error checking first
-            if (QuestionBox.Text.Length == 0)
+            string error = checkForErrors();
+            if (error != null)
             {
-                MessageBox.Show("The Question is missing.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                return;
-            }
-
-            // First check to make sure we have at least one 'correct' correctAnswer
-            if (format2.Checked && answerAIsCorrect.Checked == false && answerBIsCorrect.Checked == false && answerCIsCorrect.Checked == false && answerDIsCorrect.Checked == false && answerEIsCorrect.Checked == false)
-            {
-                // error must select correct correctAnswer first
-                MessageBox.Show("There was no correct answer selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                return;
-            }
-
-            if (format1.Checked && !trueRadio.Checked && !falseRadio.Checked)
-            {
-                // error must select correct correctAnswer first
-                MessageBox.Show("There was no correct answer selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                return;
+                MessageBox.Show(error, "Error.", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return; // Exit; don't do any more processing
             }
 
             // Get access to the presentation
@@ -245,6 +231,55 @@ namespace CP3_plugin {
             addOrUpdatePollSlide(ppApp, format1.Checked, QuestionBox.Text, answers);
             
             Close(); // the dialog
+        }
+
+        // This function either returns null (validation was successful) or an error message
+        private string checkForErrors()
+        {
+            // Ensure we have a question
+            if (QuestionBox.Text.Length == 0)
+            {
+                return "The Question is missing. Please enter a question";
+            }
+
+            if (format2.Checked) { // Multiple Choice
+                // Variables for validation checking
+                int numAnswers = 0;
+                bool noCorrectAnswers = true;
+
+                // Create an array of answers
+                string[] answers = new string[]{answerA.Text, answerB.Text, answerC.Text, answerD.Text, answerE.Text};
+                // Create an array of correctAnswers
+                bool[] correctAnswers = new bool[]{answerAIsCorrect.Checked, answerBIsCorrect.Checked, answerCIsCorrect.Checked, answerDIsCorrect.Checked, answerEIsCorrect.Checked, };
+                
+                // Iterate through arrays
+                for (int i = 0; i < answers.Length; ++i) {
+                    if (answers[i].Length > 0){ // This answer is not blank
+                        numAnswers++; // Increment the number of answers
+                        if (correctAnswers[i]) { // This is a correct answer
+                            noCorrectAnswers = false;
+                        }
+                    } else if (correctAnswers[i]) { // We don't have an answer, but it's supposedly correct?
+                        return "A blank answer has been specified as correct. Please either enter an answer, or unmark as correct";
+                    }
+                }
+                if (numAnswers < 2) {
+                    return "The number of answers is less than two. Please specificy at least two possible answers";
+                }
+                if (noCorrectAnswers) {
+                    return "No correct answers were given. Please specify at least one correct answer";
+                }
+            }
+
+            if (format1.Checked &&
+                !trueRadio.Checked &&
+                !falseRadio.Checked) {
+                return "No correct answer was specified for true / false question. Please select a correct answer";
+            }
+
+
+            // No errors; return null
+            return null;
         }
 
         private void addOrUpdatePollSlide(PowerPoint.Application application, bool isTrueFalse, string question, string[] answers)
