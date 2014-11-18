@@ -1,3 +1,19 @@
+/* Authors: Kevin Brink and Mark Friedrich
+ * Filename: QuestionForm.cs
+ * Purpose: Provides the questionForm class, which is the form that
+ *          the user sees when they desire to insert a new question
+ *          to the presentation. 
+ *          
+ *          This class includes constructors, and event handling
+ *          
+ *          It handles all of the poll insertion, including the 
+ *          slide with the question and answers, as well as the 
+ *          act of embedding the polling data into the slide itself
+ *          using custom xml
+ * 
+ * */
+
+
 using Microsoft.Office.Core;
 using System;
 using System.Collections.Generic;
@@ -10,15 +26,24 @@ using System.Windows.Forms;
 using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 
 namespace CP3_plugin {
-    public partial class Form1 : Form {
+    public partial class questionForm : Form {
         private bool editing = false;
  
-        public Form1() {
+        /// <summary>
+        /// Default, no - paramater constructor
+        /// </summary>
+        public questionForm() {
             InitializeComponent();
         }
 
-        // A different constructor for editing polls
-        public Form1(string question, string correctAnswers, string [] answers = null)
+        /// <summary>
+        /// A constructor used for editing polls, which received the necessary
+        /// parameters to create the poll
+        /// </summary>
+        /// <param name="question">The question for this poll.</param>
+        /// <param name="correctAnswers">A comma-delimited string of correct answers.</param>
+        /// <param name="answers">An array of string answers.</param>
+        public questionForm(string question, string correctAnswers, string [] answers = null)
         {
             // Initialize everything
             InitializeComponent();
@@ -79,7 +104,11 @@ namespace CP3_plugin {
             button1.Text = "Update Poll";
         }
 
-        // show correctAnswer field based on radio buttons
+        /// <summary>
+        /// Activates when question type is changed. Show correctAnswer field based on radio buttons
+        /// </summary>
+        /// <param name="sender">The object sender.</param>
+        /// <param name="e">arguments.</param>
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             if (((RadioButton)sender).Checked && ((RadioButton)sender).Text.Contains("True"))
@@ -94,20 +123,35 @@ namespace CP3_plugin {
             }
         }
 
-        // cancel button clicked
-        private void button2_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Activates when cancel button is clicked. Just close dialog
+        /// </summary>
+        /// <param name="sender">The object sender.</param>
+        /// <param name="e">arguments.</param>
+        private void cancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        // insert meta data and close form
-        private void button1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Activates when the insert or update button is clicked. Calls a 
+        /// function to do the updating / inserting
+        /// </summary>
+        /// <param name="sender">The object sender.</param>
+        /// <param name="e">arguments.</param>
+        private void insertOrUpdateButton_Click(object sender, EventArgs e)
         {
             // add or edit new slide with metadata here
             addOrUpdatePoll();            
         }
 
-        private void addOrUpdatePoll() {
+        /// <summary>
+        /// Inserts all the polling data to the slide. 
+        /// Calls a function (addOrUpdatePollSlide) to modify the actual slide
+        /// with the question and answers
+        /// </summary>
+        private void addOrUpdatePoll() 
+        {
             // Error checking first
             string error = checkForErrors();
             if (error != null)
@@ -120,18 +164,29 @@ namespace CP3_plugin {
             PowerPoint.Application ppApp = Globals.ThisAddIn.Application;
             PowerPoint.Presentation presentation = ppApp.ActivePresentation;
             PowerPoint.Slide sld;
+            PowerPoint.Slide currentSlide;
+            // Attempt to get current slide
+            try
+            {
+                currentSlide = ppApp.ActiveWindow.View.Slide;
+            }
+            catch (System.Runtime.InteropServices.COMException ex)
+            {
+                // Couldn't get that slide; just use the last one of the presentation
+                currentSlide = ppApp.ActivePresentation.Slides[ppApp.ActivePresentation.Slides.Count];
+            }
 
             if (!editing)
             {
                 // add new slide and make it active
                 // NOTE: I know it's bad practice to hard code the 7 as the index, but I have yet to figure out how to stably get access to the custom layout
-                sld = presentation.Slides.AddSlide(ppApp.ActiveWindow.View.Slide.SlideIndex + 1, presentation.SlideMaster.CustomLayouts[7]);
+                sld = presentation.Slides.AddSlide(currentSlide.SlideIndex + 1, presentation.SlideMaster.CustomLayouts[7]);
                 ppApp.ActiveWindow.View.GotoSlide(sld.SlideIndex);
             }
             else
             {
                 // Get the current slide
-                sld = ppApp.ActiveWindow.View.Slide;
+                sld = currentSlide;
             }
             
             // get current active slide
@@ -234,12 +289,14 @@ namespace CP3_plugin {
             //MessageBox.Show(data.SelectSingleNode("/CP3Poll/PollQuestion").Text, "Poll Question", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
             // Add Text to slide
-            addOrUpdatePollSlide(ppApp, format1.Checked, QuestionBox.Text, answers);
+            addOrUpdatePollSlide(ppApp.ActiveWindow.Selection.SlideRange, format1.Checked, QuestionBox.Text, answers);
             
             Close(); // the dialog
         }
 
-        // This function either returns null (validation was successful) or an error message
+        /// <summary>
+        /// This function either returns null (validation was successful) or an error message
+        /// </summary>
         private string checkForErrors()
         {
             // Ensure we have a question
@@ -272,22 +329,16 @@ namespace CP3_plugin {
                             // Check to see if this answer is a duplicate of any other answers
                             for (int j = 0; j < answers.Length; ++j)
                             {
-                                // If we're not comparing to the same answer
-                                if (j != i)
-                                { 
-                                    // If they are equal
-                                    if (answers[i].Equals(answers[j]))
-                                    {
-                                        return "Duplicate answers found: " + answers[i] + ". Please remove or change duplicates";
-                                    }
+                                // If we're not comparing to the same answer, and they're equal
+                                if (j != i && answers[i].Equals(answers[j]))
+                                {
+                                    return "Duplicate answers found: " + answers[i] + ". Please remove or change duplicates";
                                 }
                             }
                         }
                     } else if (correctAnswers[i]) { // We don't have an answer, but it's supposedly correct?
                         return "A blank answer has been specified as correct. Please either enter an answer, or unmark as correct";
                     }
-
-                    
                 }
                 if (numAnswers < 2) {
                     return "The number of answers is less than two. Please specificy at least two possible answers";
@@ -302,15 +353,21 @@ namespace CP3_plugin {
                 !falseRadio.Checked) {
                 return "No correct answer was specified for true / false question. Please select a correct answer";
             }
-
-
             // No errors; return null
             return null;
         }
 
-        private void addOrUpdatePollSlide(PowerPoint.Application application, bool isTrueFalse, string question, string[] answers)
-        {            
-            PowerPoint.SlideRange sld = application.ActiveWindow.Selection.SlideRange;
+        /// <summary>
+        /// This function does the modifications on the slide, like adding
+        /// question and answers
+        /// </summary>
+        /// <param name="sld">The current slide.</param>
+        /// <param name="isTrueFalse">A boolean to tell whether this question type is true or false or not.</param>
+        /// <param name="question">The question.</param>
+        /// <param name="answers">An array of possible answers. Not used for true / false questions</param>
+        private void addOrUpdatePollSlide(PowerPoint.SlideRange sld, bool isTrueFalse, string question, string[] answers)
+        {
+            // Access the shapes on the slide
             var shapes = sld.Shapes;
             Microsoft.Office.Interop.PowerPoint.Shape questionShape;
             Microsoft.Office.Interop.PowerPoint.Shape answersShape;
@@ -345,8 +402,6 @@ namespace CP3_plugin {
             }
             // Add the possible answers to the slide
             answersShape.TextFrame.TextRange.Text = possibleAnswers;
-            // TODO: update status bar?
-            // [Note: Based on this: http://www.pcreview.co.uk/forums/acessing-powerpoint-status-bar-via-vba-t3380533.html it's not possible in 2013]
         }
     }
 }

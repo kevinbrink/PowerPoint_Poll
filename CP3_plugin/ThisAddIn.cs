@@ -1,4 +1,10 @@
-﻿using System;
+﻿/* Authors: Kevin Brink and Mark Friedrich
+ * Filename: ThisAddIn.cs
+ * Purpose: Default file for the add-in functions, like startup, shutdown, etc.
+ *          We haven't made any changes to it
+ * */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

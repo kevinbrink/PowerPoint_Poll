@@ -57,7 +57,7 @@
             this.insertPoll.Label = "Insert Poll";
             this.insertPoll.Name = "insertPoll";
             this.insertPoll.ShowImage = true;
-            this.insertPoll.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
+            this.insertPoll.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.addPoll_Click);
             // 
             // editPoll
             // 
