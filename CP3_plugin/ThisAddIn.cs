@@ -12,6 +12,7 @@ using System.Xml.Linq;
 using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 using Office = Microsoft.Office.Core;
 
+// Note: Several items refer to CP3. This is for legacy reasons. 
 namespace CP3_plugin
 {
     public partial class ThisAddIn

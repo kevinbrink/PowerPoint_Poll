@@ -25,6 +25,7 @@ using System.Text;
 using System.Windows.Forms;
 using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 
+// Note: Several items refer to CP3. This is for legacy reasons. 
 namespace CP3_plugin {
     public partial class questionForm : Form {
         private bool editing = false;

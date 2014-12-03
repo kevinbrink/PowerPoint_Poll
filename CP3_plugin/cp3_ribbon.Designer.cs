@@ -1,4 +1,5 @@
-﻿namespace CP3_plugin {
+﻿// Note: Several items refer to CP3. This is for legacy reasons. 
+namespace CP3_plugin {
     partial class cp3_ribbon : Microsoft.Office.Tools.Ribbon.RibbonBase {
         /// <summary>
         /// Required designer variable.
@@ -40,7 +41,7 @@
             // 
             this.tab1.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
             this.tab1.Groups.Add(this.group1);
-            this.tab1.Label = "CP3 Poll";
+            this.tab1.Label = "CP4 Poll";
             this.tab1.Name = "tab1";
             // 
             // group1

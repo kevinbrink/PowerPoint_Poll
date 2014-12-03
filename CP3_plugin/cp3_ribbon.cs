@@ -14,6 +14,7 @@ using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 using Microsoft.Office.Core;
 using System.Windows.Forms;
 
+// Note: Several items refer to CP3. This is for legacy reasons. 
 namespace CP3_plugin {
     public partial class cp3_ribbon {
         /// <summary>
